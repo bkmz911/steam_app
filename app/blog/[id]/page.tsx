@@ -1,10 +1,6 @@
 import { Metadata } from "next";
 
-type Props = {
-    params: {
-        id: string;
-    };
-};
+type ParamsType = Promise<{ id: string }>;
 
 async function getData(id: string) {
     const response = await fetch(
@@ -14,8 +10,10 @@ async function getData(id: string) {
     return response.json();
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { id } = await params;
+export async function generateMetadata(props: {
+    params: ParamsType;
+}): Promise<Metadata> {
+    const { id } = await props.params;
     const post = await getData(id);
 
     return {
@@ -24,8 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default async function Post({ params }: Props) {
-    const { id } = await params;
+export default async function Post(props: { params: ParamsType }) {
+    const { id } = await props.params;
     const post = await getData(id);
 
     return (
