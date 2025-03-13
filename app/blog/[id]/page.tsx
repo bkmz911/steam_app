@@ -36,36 +36,3 @@ export default async function Post(props: { params: ParamsType }) {
         </>
     );
 }
-
-// export async function generateMetadata({
-//     params,
-// }: MetadataContext & {
-//     params: PageParams | Promise<PageParams>;
-// }): Promise<Metadata> {
-//     const { id } = await params; // Ждем разрешения params
-//     const post = await getData(id);
-
-//     return {
-//         title: post.title,
-//         description: post.body,
-//     };
-// }
-
-// export default async function Post({
-//     params,
-// }: {
-//     params: PageParams | Promise<PageParams>;
-// }) {
-//     const { id } = await params; // Ждем разрешения params
-//     const post = await getData(id);
-
-//     return (
-//         <>
-//             Post number {id}
-//             <div>
-//                 <h1>Title: {post.title}</h1>
-//                 <span>Body: {post.body}</span>
-//             </div>
-//         </>
-//     );
-// }

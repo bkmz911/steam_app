@@ -1,9 +1,15 @@
-import Link from "next/link";
+import Navigation from "./Navigation";
+
+const navItems = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Blog", href: "/blog" },
+];
 
 export default function Header() {
-    return <header className="flex items-center justify-center gap-10">
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
-        <Link href="/blog">Blog</Link>
-    </header>
+    return (
+        <header className="flex items-center justify-center gap-10">
+            <Navigation navLinks={navItems} />
+        </header>
+    );
 }
