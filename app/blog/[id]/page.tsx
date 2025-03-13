@@ -28,8 +28,6 @@ export async function generateMetadata({
 export default async function Post({ params: { id } }: Props) {
     const post = await getData(id);
 
-    console.log(post);
-
     return (
         <>
             Post number {id}
