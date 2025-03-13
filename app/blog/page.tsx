@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 async function getData() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/pos");
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
 
     if (!response.ok) throw new Error("Failed to fetch posts :(");
 

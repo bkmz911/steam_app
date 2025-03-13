@@ -14,9 +14,8 @@ async function getData(id: string) {
     return response.json();
 }
 
-export async function generateMetadata({
-    params: { id },
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { id } = await params;
     const post = await getData(id);
 
     return {
@@ -25,7 +24,8 @@ export async function generateMetadata({
     };
 }
 
-export default async function Post({ params: { id } }: Props) {
+export default async function Post({ params }: Props) {
+    const { id } = await params;
     const post = await getData(id);
 
     return (
@@ -38,3 +38,36 @@ export default async function Post({ params: { id } }: Props) {
         </>
     );
 }
+
+// export async function generateMetadata({
+//     params,
+// }: MetadataContext & {
+//     params: PageParams | Promise<PageParams>;
+// }): Promise<Metadata> {
+//     const { id } = await params; // Ждем разрешения params
+//     const post = await getData(id);
+
+//     return {
+//         title: post.title,
+//         description: post.body,
+//     };
+// }
+
+// export default async function Post({
+//     params,
+// }: {
+//     params: PageParams | Promise<PageParams>;
+// }) {
+//     const { id } = await params; // Ждем разрешения params
+//     const post = await getData(id);
+
+//     return (
+//         <>
+//             Post number {id}
+//             <div>
+//                 <h1>Title: {post.title}</h1>
+//                 <span>Body: {post.body}</span>
+//             </div>
+//         </>
+//     );
+// }
