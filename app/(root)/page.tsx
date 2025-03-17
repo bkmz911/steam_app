@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { Headband, MainText, Games } from "@/components/shared";
+
+export const metadata: Metadata = {
+    title: "Steam App | Главная",
+    description:
+        "Service that allows you to find out the inventory value of each game from your Steam account.",
+};
 
 export default function Home() {
     return (
