@@ -43,7 +43,7 @@ export const Games = () => {
                     alt="all_games"
                     className="w-auto h-[140px] rounded-[14px]"
                 />
-                <span className="uppercase text-white text-[16px] xl:text-[26px] font-bold absolute w-[147px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+                <span className="uppercase text-white text-[26px] font-bold absolute w-[147px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
                     Все игры
                 </span>
             </div>

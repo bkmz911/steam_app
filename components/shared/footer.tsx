@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FooterLogo } from "../ui/footerLogo";
+import { FooterLogo } from "../ui/footer-logo";
 
 export const Footer = () => {
     return (
