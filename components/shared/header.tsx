@@ -1,12 +1,9 @@
 "use client";
 import Image from "next/image";
-// import Link from "next/link";
-// import { Button } from "../ui";
-import { useSession, signIn } from "next-auth/react";
+
+import { signIn } from "next-auth/react";
 
 export const Header = () => {
-    const { data: session } = useSession();
-    console.log(session);
     return (
         <header className="bg-[#2C3035]">
             <nav className="flex justify-between items-center py-4 xl:py-5 px-4 xl:px-25">
