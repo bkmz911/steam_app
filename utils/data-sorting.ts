@@ -1,9 +1,9 @@
 import { Product } from "@/types/product"
 
-interface DataSortingProps {
-    data: Product[]
+export function dataSortingDecrease (data: Product[]) {
+    return data.sort((a, b) => b.price - a.price)
 }
 
-export function dataSorting (data: DataSortingProps) {
-    return data.sort((a, b) => b.price - a.price)
+export function dataSortingIncrease(data: Product[]) {
+    return data.sort((a, b) => a.price - b.price)
 }

@@ -1,3 +1,5 @@
+"use client"
+import { useFilterStore } from "@/store/filters";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
 const filters = [
@@ -12,6 +14,9 @@ const filters = [
 ];
 
 export const MainFiltersPart = () => {
+
+    const setActiveFilter = useFilterStore((state) => state.setFilter)
+
     return (
         <div className="flex items-center gap-[10px]">
             {filters.map((filter) => (
@@ -38,8 +43,8 @@ export const MainFiltersPart = () => {
                         <div className="py-1">
                             {filter.filterContent?.map((item) => (
                                 <MenuItem key={item}>
-                                    <p className="cursor-pointer block px-4 py-2 text-sm text-white text-[12px] xl:text-[18px] data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
-                                        {item === "По возрастанию" ? "hmm" : "amm"}
+                                    <p onClick={() => setActiveFilter(item)} className="cursor-pointer block px-4 py-2 text-sm text-white text-[12px] xl:text-[18px] data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
+                                        {item}
                                     </p>
                                 </MenuItem>
                             ))}
