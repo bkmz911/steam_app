@@ -21,7 +21,7 @@ export const MainFiltersPart = () => {
                     className="relative inline-block text-left"
                 >
                     <div>
-                        <MenuButton className="bg-[#2c3035] inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-white text-[12px] xl:text-[18px] shadow-xs hover:bg-gray-600 rounded-[6px] border-gray-600 border-2">
+                        <MenuButton className="bg-[#2c3035] cursor-pointer inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-white text-[12px] xl:text-[18px] shadow-xs hover:bg-gray-600 rounded-[6px] border-gray-600 border-2">
                             {filter.textFilter}
                             <img
                                 src="/arrow.svg"
@@ -38,8 +38,8 @@ export const MainFiltersPart = () => {
                         <div className="py-1">
                             {filter.filterContent?.map((item) => (
                                 <MenuItem key={item}>
-                                    <p className="block px-4 py-2 text-sm text-white text-[12px] xl:text-[18px] data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
-                                        {item}
+                                    <p className="cursor-pointer block px-4 py-2 text-sm text-white text-[12px] xl:text-[18px] data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
+                                        {item === "По возрастанию" ? "hmm" : "amm"}
                                     </p>
                                 </MenuItem>
                             ))}

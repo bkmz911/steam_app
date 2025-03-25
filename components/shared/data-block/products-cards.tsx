@@ -6,6 +6,10 @@ interface ProductsProps {
 }
 
 export const ProductsCards = ({ data }: ProductsProps) => {
+
+    const newData = data.sort((a, b) => b.price - a.price)
+    console.log(newData)
+
     return (
         <>
             {data.map((item) => {
