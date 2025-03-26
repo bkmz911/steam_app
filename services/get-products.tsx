@@ -1,3 +1,4 @@
+import { useFilterStore } from "@/store/filters";
 import { Product } from "@/types/product";
 import { Dispatch, SetStateAction } from "react";
 
@@ -10,6 +11,7 @@ interface ProductsProps {
     setTotalPages: (total: number) => void;
     setIsLoading: Dispatch<SetStateAction<boolean>>;
     setError: Dispatch<SetStateAction<Error | null>>;
+    sortOrder: string
 }
 
 export async function getProducts({
@@ -19,11 +21,12 @@ export async function getProducts({
     setTotalPages,
     setIsLoading,
     setError,
+    sortOrder,
 }: ProductsProps): Promise<void> {
     setIsLoading(true);
     try {
         const response = await fetch(
-                `${API_URL}/items?page=${currentPage}&limit=${limitPage}`
+                `${API_URL}/items?page=${currentPage}&limit=${limitPage}&sort=${sortOrder}`
             ),
             data = await response.json();
         setData(data.items);

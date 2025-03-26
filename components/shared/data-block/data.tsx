@@ -9,6 +9,7 @@ import {
     Preloader,
     ProductsCards,
 } from "@/components/shared";
+import { useFilterStore } from "@/store/filters";
 
 export function DataBlock() {
     const [data, setData] = useState<Product[]>([]),
@@ -16,7 +17,8 @@ export function DataBlock() {
         [totalPages, setTotalPages] = useState(1),
         [isLoading, setIsLoading] = useState(false),
         [error, setError] = useState<Error | null>(null),
-        limitPage = 18;
+        limitPage = 18,
+        sortOrder = useFilterStore((state) => state.filter) === "По возрастанию" ? "asc" : "desc"
 
     useEffect(() => {
         getProducts({
@@ -26,8 +28,9 @@ export function DataBlock() {
             setTotalPages,
             setIsLoading,
             setError,
+            sortOrder
         });
-    }, [currentPage]);
+    }, [currentPage, sortOrder]);
 
 
     return (

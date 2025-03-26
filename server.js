@@ -18,14 +18,18 @@ const items = Array.from({ length: 1000 }, (_, i) => ({
 
 app.get("/items", (req, res) => {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 36;
+    const limit = parseInt(req.query.limit) || 18;
+    const sort = req.query.sort === "asc" ? 1 : -1; // 1 для возрастания, -1 для убывания
+
+    // Допустим, items — массив объектов
+    const sortedItems = items.sort((a, b) => sort * (a.price - b.price));
     const start = (page - 1) * limit;
     const end = start + limit;
-    const paginatedItems = items.slice(start, end);
+    const paginatedItems = sortedItems.slice(start, end);
 
     res.json({
-        items: paginatedItems, // Элементы текущей страницы
-        total: items.length, // Общее количество всех элементов
+        items: paginatedItems,
+        total: items.length,
     });
 });
 

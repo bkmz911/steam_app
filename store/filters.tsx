@@ -2,11 +2,11 @@ import { ReactNode } from "react"
 import { create } from "zustand"
 
 interface State{
-    filter: ReactNode | null
-    setFilter: (filter: ReactNode | null) => void
+    filter: string
+    setFilter: (filter: string) => void
 }
 
 export const useFilterStore = create<State>()((set) => ({
     filter: "По возрастанию",
-    setFilter: (filter: ReactNode | null) => set({filter})
+    setFilter: (filter: string) => set({filter})
 }))
