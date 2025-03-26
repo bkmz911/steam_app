@@ -8,13 +8,18 @@ const app = express();
 // Настраиваем CORS
 app.use(cors()); // Разрешаем запросы с любого источника
 
-const items = Array.from({ length: 1000 }, (_, i) => ({
-    id: `${i + 1}`,
-    name: `Item ${i + 1}`,
-    avatar: `https://picsum.photos/seed/${i + 1}/200/300`,
-    price: 100 + i,
-    discountPrice: 80 + i,
-}));
+const rareArray = ["common", "rare", "epic", "legendary", "mythic"];
+
+const items = Array.from({ length: 1000 }, (_, i) => {
+    const randomRare = rareArray[Math.floor(Math.random() * rareArray.length)];
+    return {
+        id: `${i + 1}`,
+        name: `Item ${i + 1}`,
+        avatar: `https://picsum.photos/seed/${i + 1}/200/300`,
+        price: Number((Math.random() * 100).toFixed(2)) + i,
+        rare: randomRare,
+    };
+});
 
 app.get("/items", (req, res) => {
     const page = parseInt(req.query.page) || 1;

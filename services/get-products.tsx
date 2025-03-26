@@ -1,4 +1,3 @@
-import { useFilterStore } from "@/store/filters";
 import { Product } from "@/types/product";
 import { Dispatch, SetStateAction } from "react";
 
@@ -11,7 +10,8 @@ interface ProductsProps {
     setTotalPages: (total: number) => void;
     setIsLoading: Dispatch<SetStateAction<boolean>>;
     setError: Dispatch<SetStateAction<Error | null>>;
-    sortOrder: string
+    sortOrder: string;
+    setTotal: (totalPages: number) => void;
 }
 
 export async function getProducts({
@@ -22,6 +22,7 @@ export async function getProducts({
     setIsLoading,
     setError,
     sortOrder,
+    setTotal,
 }: ProductsProps): Promise<void> {
     setIsLoading(true);
     try {
@@ -30,6 +31,7 @@ export async function getProducts({
             ),
             data = await response.json();
         setData(data.items);
+        setTotal(data.total);
         setTotalPages(Math.ceil(data.total / limitPage));
     } catch (error) {
         setError(error as Error);

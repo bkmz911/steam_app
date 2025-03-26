@@ -1,10 +1,13 @@
 import { Product } from "@/types/product";
+import { rareStyles } from "@/utils/rare-styles";
 
 interface ProductProps {
     item: Product;
 }
 
 export const ProductCard = ({ item }: ProductProps) => {
+    const rareClass = rareStyles[item.rare] || "text-[#000000]";
+
     return (
         <div className="w-[167px] 2xl:w-[270px] h-[288px] rounded-lg mt-[20px]">
             <img
@@ -17,11 +20,13 @@ export const ProductCard = ({ item }: ProductProps) => {
                     {item.name}
                 </span>
                 <div className="flex justify-between pt-[18px] px-[10px] 2xl:px-[16px]">
-                    <span className="text-[#4daefc] text-[14px] 2xl:text-[20px] font-semibold">
-                        ₽ {item.discountPrice.toFixed(2)}
+                    <span
+                        className={`${rareClass} text-[14px] 2xl:text-[20px] font-semibold`}
+                    >
+                        {item.rare}
                     </span>
                     <span className="text-white text-[14px] 2xl:text-[20px] font-semibold">
-                        ₽ {item.price.toFixed(2)}
+                        $ {item.price.toFixed(2)}
                     </span>
                 </div>
             </div>

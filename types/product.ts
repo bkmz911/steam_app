@@ -3,5 +3,5 @@ export interface Product {
     name: string;
     avatar: string;
     price: number;
-    discountPrice: number;
+    rare: string;
 }
