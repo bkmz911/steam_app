@@ -9,8 +9,9 @@ import {
     Preloader,
     ProductsCards,
 } from "@/components/shared";
-import { useFilterStore } from "@/store/filters";
+import { useSortingStore } from "@/store/sorting";
 import { useTotalDataStore } from "@/store/data-total";
+import { useFilterStore } from "@/store/filters";
 
 export function DataBlock() {
     const [data, setData] = useState<Product[]>([]),
@@ -21,9 +22,10 @@ export function DataBlock() {
         [error, setError] = useState<Error | null>(null),
         limitPage = 18,
         sortOrder =
-            useFilterStore((state) => state.filter) === "По возрастанию"
+            useSortingStore((state) => state.sorting) === "По возрастанию"
                 ? "asc"
-                : "desc";
+                : "desc",
+        rare = useFilterStore((state) => state.filter)
 
     useEffect(() => {
         getProducts({
@@ -35,10 +37,9 @@ export function DataBlock() {
             setError,
             sortOrder,
             setTotal,
+            rare
         });
-    }, [currentPage, setTotal, sortOrder]);
-
-    // console.log((Math.random() * 10).toFixed(0))
+    }, [currentPage, setTotal, sortOrder, rare]);
 
     return (
         <>

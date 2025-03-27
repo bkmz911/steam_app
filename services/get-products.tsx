@@ -12,6 +12,7 @@ interface ProductsProps {
     setError: Dispatch<SetStateAction<Error | null>>;
     sortOrder: string;
     setTotal: (totalPages: number) => void;
+    rare: string
 }
 
 export async function getProducts({
@@ -23,11 +24,12 @@ export async function getProducts({
     setError,
     sortOrder,
     setTotal,
+    rare
 }: ProductsProps): Promise<void> {
     setIsLoading(true);
     try {
         const response = await fetch(
-                `${API_URL}/items?page=${currentPage}&limit=${limitPage}&sort=${sortOrder}`
+                `${API_URL}/items?page=${currentPage}&limit=${limitPage}&sort=${sortOrder}&rare=${rare}`
             ),
             data = await response.json();
         setData(data.items);

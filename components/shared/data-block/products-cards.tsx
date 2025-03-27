@@ -1,29 +1,53 @@
 import { Product } from "@/types/product";
 import { ProductCard } from "@/components/shared";
-import { useFilterStore } from "@/store/filters";
-// import { dataSortingDecrease, dataSortingIncrease } from "@/utils/data-sorting";
-import { useMemo } from "react";
+// import { useSortingStore } from "@/store/sorting";
+// import { useMemo } from "react";
+// import { useFilterStore } from "@/store/filters";
 
 interface ProductsProps {
     data: Product[];
 }
 
 export const ProductsCards = ({ data }: ProductsProps) => {
-    const filter = useFilterStore((state) => state.filter);
-    const sortedData = useMemo(() => {
-        const clonedData = [...data];
-        if (filter === "По возрастанию") {
-            return clonedData.sort((a, b) => a.price - b.price);
-        } else if (filter === "По убыванию") {
-            return clonedData.sort((a, b) => b.price - a.price);
-        }
+    // Сортировка (потом вынести в отдельны компонент)
+    // const sorting = useSortingStore((state) => state.sorting);
 
-        return clonedData;
-    }, [data, filter]);
+    // const sortedData = useMemo(() => {
+    //     const clonedData = [...data];
+    //     if (sorting === "По возрастанию") {
+    //         return clonedData.sort((a, b) => a.price - b.price);
+    //     } else if (sorting === "По убыванию") {
+    //         return clonedData.sort((a, b) => b.price - a.price);
+    //     }
+
+    //     return clonedData;
+    // }, [data, sorting]);
+
+    // Фильтрация (разбить на отдельный компонент в последствии)
+
+    // const filter = useFilterStore((state) => state.filter);
+
+    // const filterData = useMemo(() => {
+    //     const clonedData = [...data];
+
+    //     if (filter === "common") {
+    //         return clonedData.filter((item) => item.rare === "common");
+    //     } else if (filter === "rare") {
+    //         return clonedData.filter((item) => item.rare === "rare");
+    //     } else if (filter === "epic") {
+    //         return clonedData.filter((item) => item.rare === "epic");
+    //     } else if (filter === "legendary") {
+    //         return clonedData.filter((item) => item.rare === "legendary");
+    //     } else if (filter === "mythic") {
+    //         return clonedData.filter((item) => item.rare === "mythic");
+    //     } else {
+    //         return clonedData;
+    //     }
+    // }, [data, filter]);
 
     return (
         <>
-            {sortedData.map((item) => (
+            {data.map((item) => (
                 <ProductCard key={item.id} item={item} />
             ))}
         </>
