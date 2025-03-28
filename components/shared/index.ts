@@ -16,6 +16,7 @@ export { DownloadFilePart } from "./profile-block/download-file-part";
 export { FiltersBlock } from "./filters-block/filters";
 export { DescriptionPart } from "./filters-block/description-part";
 export { MainFiltersPart } from "./filters-block/main-filters-part";
+export { FilterBlock } from "./filters-block/filter"
 
 export { DataBlock } from "./data-block/data";
 export { ProductsCards } from "./data-block/products-cards";
@@ -24,3 +25,4 @@ export { ProductCard } from "./data-block/product-card";
 export { PaginationBlock } from "./pagination-block/pagination";
 export { PaginationButton } from "./pagination-block/pagination-button";
 export { PaginationSteps } from "./pagination-block/pagination-steps";
+

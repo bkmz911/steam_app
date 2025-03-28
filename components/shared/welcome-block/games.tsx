@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const className = "w-auto h-[136px] rounded-[14px]",
     images = [
@@ -33,6 +36,11 @@ const className = "w-auto h-[136px] rounded-[14px]",
     ];
 
 export const Games = () => {
+
+    const pathname = usePathname()
+
+    console.log(pathname)
+
     return (
         <div className="flex justify-center flex-wrap gap-5 mt-10">
             <div className="relative">
