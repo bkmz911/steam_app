@@ -1,45 +1,43 @@
-"use client"
+"use client";
 
+import { useGamesStore } from "@/store/data-games";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 
-const className = "w-auto h-[136px] rounded-[14px]",
+const className = "w-auto h-[136px] rounded-[14px] cursor-pointer",
     images = [
         {
             src: "/cs2_logo.webp",
             width: 279,
             height: 136,
-            alt: "cs_logo",
+            alt: "cs2",
             className,
         },
         {
             src: "/dota2_logo.webp",
             width: 237,
             height: 136,
-            alt: "dota_logo",
+            alt: "dota2",
             className,
         },
         {
             src: "/rust_logo.webp",
             width: 136,
             height: 136,
-            alt: "rust_logo",
+            alt: "rust",
             className,
         },
         {
             src: "/TF2_logo.webp",
             width: 237,
             height: 136,
-            alt: "tf_logo",
+            alt: "tf2",
             className,
         },
     ];
 
 export const Games = () => {
-
-    const pathname = usePathname()
-
-    console.log(pathname)
+    const game = useGamesStore((state) => state.game).toLocaleLowerCase(),
+    setGame = useGamesStore((state) => state.setGame)
 
     return (
         <div className="flex justify-center flex-wrap gap-5 mt-10">
@@ -55,16 +53,21 @@ export const Games = () => {
                     Все игры
                 </span>
             </div>
-            {images.map((image, index) => (
-                <Image
-                    key={index}
-                    src={image.src}
-                    width={image.width}
-                    height={image.height}
-                    alt={image.alt}
-                    className={image.className}
-                />
-            ))}
+            {images.map((image) => {
+                return (
+                    <Image
+                        key={image.alt}
+                        src={image.src}
+                        width={image.width}
+                        height={image.height}
+                        alt={image.alt}
+                        className={`${image.className} ${
+                            game === image.alt && "border-[4px] border-[#3C73DD]"
+                        }`}
+                        onClick={() => setGame(image.alt)}
+                    />
+                );
+            })}
         </div>
     );
 };

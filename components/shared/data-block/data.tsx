@@ -12,6 +12,7 @@ import {
 import { useSortingStore } from "@/store/sorting";
 import { useTotalDataStore } from "@/store/data-total";
 import { useFilterStore } from "@/store/filters";
+import { useGamesStore } from "@/store/data-games";
 
 export function DataBlock() {
     const [data, setData] = useState<Product[]>([]),
@@ -25,7 +26,8 @@ export function DataBlock() {
             useSortingStore((state) => state.sorting) === "По возрастанию"
                 ? "asc"
                 : "desc",
-        rare = useFilterStore((state) => state.filter)
+        rare = useFilterStore((state) => state.filter),
+        currentGame = useGamesStore((state) => state.game);
 
     useEffect(() => {
         getProducts({
@@ -37,9 +39,10 @@ export function DataBlock() {
             setError,
             sortOrder,
             setTotal,
-            rare
+            rare,
+            currentGame,
         });
-    }, [currentPage, setTotal, sortOrder, rare]);
+    }, [currentPage, setTotal, sortOrder, rare, currentGame]);
 
     return (
         <>
