@@ -3,17 +3,14 @@
 import { Product } from "@/types/product";
 import { useEffect, useState } from "react";
 import { getProducts } from "@/services/get-products";
-import {
-    Error,
-    PaginationBlock,
-    Preloader,
-    ProductsCards,
-} from "@/components/shared";
+import { InfoBlock, PaginationBlock, ProductsCards } from "@/components/shared";
+import { Error, PreloaderData } from "@/components/ui";
 import { useSortingStore } from "@/store/sorting";
 import { useTotalDataStore } from "@/store/data-total";
 import { useFilterStore } from "@/store/filters";
 import { useGamesStore } from "@/store/data-games";
-
+import { useInventoryCostStore } from "@/store/inventory-cost";
+import { useSession } from "next-auth/react";
 export function DataBlock() {
     const [data, setData] = useState<Product[]>([]),
         setTotal = useTotalDataStore((state) => state.setTotal),
@@ -27,7 +24,8 @@ export function DataBlock() {
                 ? "asc"
                 : "desc",
         rare = useFilterStore((state) => state.filter),
-        currentGame = useGamesStore((state) => state.game);
+        currentGame = useGamesStore((state) => state.game),
+        setInventoryCost = useInventoryCostStore((state) => state.setCost);
 
     useEffect(() => {
         getProducts({
@@ -41,18 +39,21 @@ export function DataBlock() {
             setTotal,
             rare,
             currentGame,
+            setInventoryCost,
         });
-    }, [currentPage, setTotal, sortOrder, rare, currentGame]);
+    }, [currentPage, setTotal, sortOrder, rare, currentGame, setInventoryCost]);
+
+    const { data: session } = useSession();
 
     return (
         <>
             {error ? (
                 <Error error={error} />
-            ) : (
+            ) : session ? (
                 <>
-                    <div className="flex items-center justify-center flex-wrap gap-2 2xl:gap-[20px] mx-4 2xl:mx-[100px]">
+                    <div className="flex items-center justify-center flex-wrap gap-2 2xl:gap-[20px] mx-4 2xl:mx-[100px] mt-[20px]">
                         {isLoading ? (
-                            <Preloader />
+                            <PreloaderData />
                         ) : (
                             <ProductsCards data={data} />
                         )}
@@ -63,6 +64,8 @@ export function DataBlock() {
                         totalPages={totalPages}
                     />
                 </>
+            ) : (
+                <InfoBlock />
             )}
         </>
     );

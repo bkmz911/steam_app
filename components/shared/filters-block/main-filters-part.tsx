@@ -18,7 +18,7 @@ export const MainFiltersPart = () => {
     const setActiveFilter = useFilterStore((state) => state.setFilter);
 
     return (
-        <div className="flex items-center gap-[10px]">
+        <div className="flex items-center gap-[10px] mt-[15px] xl:mt-0">
 
             {/* Меню для сортировки по цене */}
             <FilterBlock mainText="Цена" filterContent={priceFilterContent} setActiveItem={setActiveSorting} />

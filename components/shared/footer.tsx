@@ -21,11 +21,13 @@ export const Footer = () => {
                             src="/tg.svg"
                             alt="tg"
                             className="mr-[15px] w-[26px] xl:w-[42px] h-[26px] xl:h-[42px]"
+                            href={"https://t.me/Bkmz911"}
                         />
                         <FooterLogo
                             src="/vk.svg"
                             alt="vk"
                             className="w-[26px] xl:w-[42px] h-[26px] xl:h-[42px]"
+                            href={"https://vk.com/ilusha.chaan"}
                         />
                     </div>
                 </div>

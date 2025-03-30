@@ -24,7 +24,7 @@ export const PaginationButton = ({
                 width={20}
                 height={12.35}
                 alt="pagination_arrow"
-                className="w-4 2xl:w-6 h-4 2xl:h-6"
+                className="w-3 2xl:w-6 h-3 2xl:h-6"
             />
         </button>
     );

@@ -3,7 +3,7 @@
 import { useGamesStore } from "@/store/data-games";
 import Image from "next/image";
 
-const className = "w-auto h-[136px] rounded-[14px] cursor-pointer",
+const className = "w-auto h-[136px] rounded-[14px] cursor-pointer hover:scale-105 duration-200",
     images = [
         {
             src: "/cs2_logo.webp",

@@ -32,6 +32,18 @@ function generateItems(game) {
     });
 }
 
+// Кэш для хранения сгенерированных товаров для каждой игры
+const itemsByGame = {};
+
+// Функция для получения товаров для заданной игры из кэша или их генерации, если они ещё не созданы
+function getItemsForGame(game) {
+    const gameKey = game.toLowerCase();
+    if (!itemsByGame[gameKey]) {
+        itemsByGame[gameKey] = generateItems(gameKey);
+    }
+    return itemsByGame[gameKey];
+}
+
 // Динамический роутинг по игре. Эндпоинт: /:game
 app.get("/:game", (req, res) => {
     const game = req.params.game.toLowerCase(); // например, cs2, dota2, rust, tf2
@@ -45,14 +57,20 @@ app.get("/:game", (req, res) => {
         rareFilter = rareSynonyms[rareFilter];
     }
 
-    // Генерируем товары для данной игры
-    const items = generateItems(game);
+    // Получаем товары для данной игры (из кэша или генерируем, если ещё не созданы)
+    const items = getItemsForGame(game);
 
-    // Если фильтр не "all", фильтруем товары по редкости
+    // Если выбран фильтр, отличающийся от "all", фильтруем товары по редкости
     let filteredItems = items;
     if (rareFilter !== "all") {
         filteredItems = items.filter((item) => item.rare === rareFilter);
     }
+
+    // Вычисляем общую стоимость инвентаря для всех отфильтрованных товаров
+    const inventoryCost = filteredItems.reduce(
+        (acc, item) => acc + item.price,
+        0
+    );
 
     // Сортируем отфильтрованные товары по цене
     const sortedItems = filteredItems.sort(
@@ -66,6 +84,7 @@ app.get("/:game", (req, res) => {
     res.json({
         items: paginatedItems,
         total: filteredItems.length,
+        inventoryCost,
     });
 });
 

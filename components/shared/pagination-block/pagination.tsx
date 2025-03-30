@@ -10,8 +10,8 @@ export const PaginationBlock = ({
     const pages = getPaginationRange(totalPages, currentPage, 2);
 
     return (
-        <div className="bg-[#191c22] 2xl:bg-[#212327] mt-[20px] px-[20px] 2xl:px-[600px] 2xl:my-[55px]">
-            <div className="flex items-center justify-center gap-[50px] pt-[15px]">
+        <div className="bg-[#212327] px-[20px] 2xl:px-[600px] 2xl:my-[55px]">
+            <div className="flex items-center justify-center gap-5 2xl:gap-[50px] py-[15px]">
                 <PaginationButton
                     setCurrentPage={() =>
                         setCurrentPage((prev) => Math.max(prev - 1, 1))

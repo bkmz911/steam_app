@@ -12,8 +12,9 @@ interface ProductsProps {
     setError: Dispatch<SetStateAction<Error | null>>;
     sortOrder: string;
     setTotal: (totalPages: number) => void;
-    rare: string
-    currentGame: string
+    rare: string;
+    currentGame: string;
+    setInventoryCost: (cost: number) => void;
 }
 
 export async function getProducts({
@@ -26,7 +27,8 @@ export async function getProducts({
     sortOrder,
     setTotal,
     rare,
-    currentGame
+    currentGame,
+    setInventoryCost,
 }: ProductsProps): Promise<void> {
     setIsLoading(true);
     try {
@@ -36,6 +38,7 @@ export async function getProducts({
             data = await response.json();
         setData(data.items);
         setTotal(data.total);
+        setInventoryCost(data.inventoryCost);
         setTotalPages(Math.ceil(data.total / limitPage));
     } catch (error) {
         setError(error as Error);

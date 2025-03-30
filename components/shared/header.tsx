@@ -2,10 +2,14 @@
 import Image from "next/image";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Button } from "@/components/ui";
+import { Button, PreloaderAuthentication } from "@/components/ui";
 
 export const Header = () => {
-    const { data } = useSession();
+    const { data, status } = useSession();
+
+    if (status === "loading") {
+        return <PreloaderAuthentication />;
+    }
 
     return (
         <header className="bg-[#2C3035]">
@@ -19,17 +23,13 @@ export const Header = () => {
                                 redirect: true,
                             })
                         }
-                        className="w-[140px] xl:w-[260px] h-[36px] xl:h-[56px] bg-[#3c73dd] rounded-lg xl:rounded-2xl text-white uppercase text-[10px] xl:text-[16px] shadow-button font-semibold cursor-pointer"
                     >
                         Войти через Github
                     </Button>
                 ) : (
                     <div>
-                        <Button
-                            onClick={() => signOut({ callbackUrl: "/" })}
-                            className="w-[140px] xl:w-[260px] h-[36px] xl:h-[56px] bg-[#3c73dd] rounded-lg xl:rounded-2xl text-white uppercase text-[10px] xl:text-[16px] shadow-button font-semibold cursor-pointer"
-                        >
-                            Выйти? {data?.user?.name}
+                        <Button onClick={() => signOut({ callbackUrl: "/" })}>
+                            {data?.user?.name}. Выйти?
                         </Button>
                     </div>
                 )}

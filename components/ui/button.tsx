@@ -9,7 +9,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
     return (
         <button
-            className={`w-[140px] xl:w-[260px] h-[36px] xl:h-[56px] bg-[#3c73dd] rounded-lg xl:rounded-2xl text-white uppercase text-[10px] xl:text-[16px] shadow-button font-semibold ${
+            className={`w-[140px] xl:w-[260px] h-[36px] xl:h-[56px] bg-[#3c73dd] rounded-lg xl:rounded-2xl text-white uppercase text-[10px] xl:text-[16px] cursor-pointer font-semibold hover:shadow-button active:opacity-50 ${
                 className || ""
             }`}
             {...others}
