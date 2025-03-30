@@ -3,7 +3,8 @@
 import { useGamesStore } from "@/store/data-games";
 import Image from "next/image";
 
-const className = "w-auto h-[136px] rounded-[14px] cursor-pointer hover:scale-105 duration-200",
+const className =
+        "w-auto h-[136px] rounded-[14px] cursor-pointer hover:scale-105 duration-200",
     images = [
         {
             src: "/cs2_logo.webp",
@@ -37,7 +38,7 @@ const className = "w-auto h-[136px] rounded-[14px] cursor-pointer hover:scale-10
 
 export const Games = () => {
     const game = useGamesStore((state) => state.game).toLocaleLowerCase(),
-    setGame = useGamesStore((state) => state.setGame)
+        setGame = useGamesStore((state) => state.setGame);
 
     return (
         <div className="flex justify-center flex-wrap gap-5 mt-10">
@@ -62,7 +63,8 @@ export const Games = () => {
                         height={image.height}
                         alt={image.alt}
                         className={`${image.className} ${
-                            game === image.alt && "border-[4px] border-[#3C73DD]"
+                            game === image.alt &&
+                            "border-[4px] border-[#3C73DD]"
                         }`}
                         onClick={() => setGame(image.alt)}
                     />
