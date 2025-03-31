@@ -47,7 +47,11 @@ export function DataBlock() {
     return (
         <>
             {error ? (
-                <Error error={error} />
+                <Error
+                    error={error}
+                    subText="Произошла ошибка при загрузке данных. Пожалуйста, попробуйте
+                обновить страницу или повторите попытку позже."
+                />
             ) : session ? (
                 <>
                     <div className="flex items-center justify-center flex-wrap gap-2 2xl:gap-[20px] mx-4 2xl:mx-[100px] mt-[20px]">

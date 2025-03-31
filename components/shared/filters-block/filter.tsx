@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { getRareStyle } from "@/utils/rare-styles";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
@@ -23,7 +24,7 @@ export const FilterBlock = ({mainText, filterContent, setActiveItem}: FilterProp
                 </div>
                 <MenuItems
                     transition
-                    className="absolute right-0 z-10 mt-2 max-w-[200px] origin-top-right rounded-md bg-[#2c3035] border-gray-600 border-2 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden"
+                    className="absolute left-0 z-10 mt-2 max-w-[200px] origin-top-left 2xl:origin-top-right rounded-md bg-[#2c3035] border-gray-600 border-2 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden"
                 >
                     <div className="py-1">
                         {filterContent.map((item) => {
