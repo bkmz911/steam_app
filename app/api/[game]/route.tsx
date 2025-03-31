@@ -38,9 +38,9 @@ function getItemsForGame(game: string) {
 
 export async function GET(
     request: Request,
-    { params }: { params: { game: string } }
+    { params }: { params: Promise<{ game: string }> }
 ) {
-    const { game } = params;
+    const game = (await params).game;
     const { searchParams } = new URL(request.url);
 
     const page = parseInt(searchParams.get("page") || "1", 10);
