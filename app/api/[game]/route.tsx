@@ -38,9 +38,8 @@ function getItemsForGame(game: string) {
 
 export async function GET(
     request: Request,
-    { params }: { params: { [key: string]: string } }
+    { params }: { params: { game: string } }
 ) {
-    // Получаем динамический параметр "game" напрямую
     const { game } = params;
     const { searchParams } = new URL(request.url);
 
