@@ -25,7 +25,8 @@ export function DataBlock() {
                 : "desc",
         rare = useFilterStore((state) => state.filter),
         currentGame = useGamesStore((state) => state.game),
-        setInventoryCost = useInventoryCostStore((state) => state.setCost);
+        setInventoryCost = useInventoryCostStore((state) => state.setCost),
+        { data: session } = useSession();
 
     useEffect(() => {
         getProducts({
@@ -42,8 +43,6 @@ export function DataBlock() {
             setInventoryCost,
         });
     }, [currentPage, setTotal, sortOrder, rare, currentGame, setInventoryCost]);
-
-    const { data: session } = useSession();
 
     return (
         <>

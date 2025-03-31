@@ -1,7 +1,7 @@
 import { Product } from "@/types/product";
 import { Dispatch, SetStateAction } from "react";
 
-const API_URL = "http://localhost:3001";
+const API_URL = "/api";
 
 interface ProductsProps {
     setData: (data: Product[]) => void;
