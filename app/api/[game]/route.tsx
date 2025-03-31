@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 
 const rareSynonyms: Record<string, string> = {
@@ -25,7 +26,6 @@ function generateItems(game: string) {
     });
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const itemsByGame: Record<string, any[]> = {};
 
 function getItemsForGame(game: string) {
@@ -38,10 +38,10 @@ function getItemsForGame(game: string) {
 
 export async function GET(
     request: Request,
-    { params }: { params: { game: string } }
+    { params }: { params: { [key: string]: string } }
 ) {
-    // Обеспечиваем, что params асинхронно разрешены
-    const { game } = await Promise.resolve(params);
+    // Получаем динамический параметр "game" напрямую
+    const { game } = params;
     const { searchParams } = new URL(request.url);
 
     const page = parseInt(searchParams.get("page") || "1", 10);
@@ -54,27 +54,22 @@ export async function GET(
         rareFilter = rareSynonyms[rareFilter];
     }
 
-    // Получаем товары для данной игры (из кэша или генерируем, если ещё не созданы)
     const items = getItemsForGame(game);
 
-    // Фильтрация по редкости
     let filteredItems = items;
     if (rareFilter !== "all") {
         filteredItems = items.filter((item) => item.rare === rareFilter);
     }
 
-    // Вычисляем общую стоимость инвентаря для всех отфильтрованных товаров
     const inventoryCost = filteredItems.reduce(
         (acc, item) => acc + item.price,
         0
     );
 
-    // Сортировка по цене
     const sortedItems = filteredItems.sort(
         (a, b) => sortOrder * (a.price - b.price)
     );
 
-    // Пагинация
     const start = (page - 1) * limit;
     const paginatedItems = sortedItems.slice(start, start + limit);
 
